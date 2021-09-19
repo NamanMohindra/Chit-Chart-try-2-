@@ -8,29 +8,43 @@
   background-color: #CCCCFF;
 }
 
-#myImage{
+#myImage,#myImage1{
   border-collapse: collapse;
-  display: block;
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 49%;
   max-width:80%;
   max-height:80%;
-  padding: 10px
+  padding-left: 10px;
+  padding-right:5px;
+  padding-bottom: 10px;
+} 
+
+.header-{
+  display:block;
+  padding: 5px;
+}
+
+.btn-primary{
+  background-color: #8064A2;
+  border: none;
+  display: block;
 }
 
 .inner-header{
   text-align: center;
-}
-h2{
-  text-align: center;
-
+  display: block;
 }
 
 form {
-  display: inline-block;
+  display: block;
 }
 
+
+h2{
+  display: block;
+}
 body {
   padding: 0;
   margin: 0;
@@ -38,18 +52,4 @@ body {
   text-align: center;
   background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGBRT9PFI5mUMFB6qZ1a8D1rOrllFd-kAPxQ&usqp=CAU')
 }
-
-
-button{
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 0 8px rgb(207, 207, 207);
-}
-
-button:hover{
-  border: none;
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: inset 0 0 8px #f9f8fc;
-  } 
 

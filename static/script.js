@@ -28,11 +28,20 @@ let counter = 0;
 
 
 var myImageElement = document.getElementById('myImage');
-myImageElement.src = './static/animal.jpg?rand=' + Math.random();
+myImageElement.src = '/static/animal.jpg?rand=' + Math.random();
 
 setInterval(function() {
       var myImageElement = document.getElementById('myImage');
-      myImageElement.src = './static/animal.jpg?rand=' + Math.random();
+      myImageElement.src = '/static/animal.jpg?rand=' + Math.random();
+ }, 1000);
+
+
+var myImageElement1 = document.getElementById('myImage1');
+myImageElement1.src = '/static/animal2.jpg?rand=' + Math.random();
+
+setInterval(function() {
+      var myImageElement1 = document.getElementById('myImage1');
+      myImageElement1.src = '/static/animal2.jpg?rand=' + Math.random();
  }, 1000);
 
 function submit_form(){

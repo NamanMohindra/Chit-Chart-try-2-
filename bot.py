@@ -14,7 +14,7 @@ from processing import Token_List,Chat_processor,Token,Tester
 from shutil import copyfile
 import os 
 nest_asyncio.apply()
-
+sns.set_theme()
 class Bot(commands.Bot):
 
     def __init__(self, refresh_flag):
@@ -25,7 +25,7 @@ class Bot(commands.Bot):
         self.nlp_processor = Chat_processor()
         self.mode = 1
         self.last_time_graph = time.time()
-        super().__init__(token='chd088egdk7ocqx4rbqs9ux367gckw', prefix='?', initial_channels=['bananashooter07'])
+        super().__init__(token='chd088egdk7ocqx4rbqs9ux367gckw', prefix='?', initial_channels=['NRG_Hamlinz','39daph','QuackityToo'])
         self.refresh_flag = refresh_flag
 
     async def event_ready(self):
@@ -47,6 +47,7 @@ class Bot(commands.Bot):
 
         # we need to process the message first before dictionary
         # remember to add rstrip and lstrip
+        print("in event_message")
         self.nlp_processor.process_string(message.content,message.author.name)
         
         
@@ -74,7 +75,7 @@ class Bot(commands.Bot):
             y_axis.append(i[1])
         plt.figure(figsize=(10,8))
         plt.title("Word Frequency",fontsize=30)
-        ax = sns.barplot(x = x_axis, y = y_axis,palette=("Purples_r"))
+        ax = sns.barplot(x = x_axis, y = y_axis,palette=("plasma"))
         ax.set_xlabel('Words', fontsize=16)
         ax.set_ylabel('Frequency', fontsize=16)
         plt.rcParams['font.size'] = '18'
@@ -89,12 +90,15 @@ class Bot(commands.Bot):
             print(inputs)
             x_axis = ['110','100','90','80','70','60','50','40','30','20','10','live']
             y_axis = inputs
+            x = [1,2,3,4,5,6,7,8,9,10,11,12]
+            plt.xticks(x, x_axis)
             plt.rcParams['font.size'] = '14'
             plt.figure(figsize=(10,8))
             plt.title("Messages per minute",fontsize = 30)
             ax = sns.lineplot(x = x_axis, y = y_axis,marker='o',color='purple')
             ax.set_xlabel('Seconds before', fontsize=16)
-            ax.set_ylabel('Messages per minute', fontsize=16)
+            ax.set_ylabel('Frequency of Messages', fontsize=16)
+            plt.fill_between(x = x_axis,y1 = y_axis,color = 'purple',alpha=0.65)
             plt.savefig(r'./static/animal2.jpg')
             print('lineplot was printed')
 

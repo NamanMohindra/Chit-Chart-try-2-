@@ -12,36 +12,30 @@
     
   </head>
   <body>
+<div class="header-"
 
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
- 
-    <a class="navbar-brand" href="#">
-      <img src="https://variety.com/wp-content/uploads/2019/09/twitch_logo.jpg" alt="" width="50" height="40" class="d-inline-block align-text-top">
-        <h2>Twitch Chat Metrics </h2>
-         <div class="inner-header">
-      
+   
+
+<div class="inner-header">
+  
+          <h2> <img src="{{url_for('static',filename = 'chitchart.jpg')}}" alt="" width="150" height="150">Twitch Chat Metrics </h2>
          
       </div>
-    </a>
-  </div>
-   
-</nav>
 
+</div>
+      <div class="container">
 
-
-	
-
-         <img src="{{url_for('static',filename = 'animal.jpg')}}" align="middle" height = "600" width="600" id = "myImage" />
-          
+        <img src="{{url_for('static',filename = 'animal2.jpg')}}"  height = "570" width="600" id = "myImage1" />
+        <img src="{{url_for('static',filename = 'animal.jpg')}}" height = "570" width="600" id = "myImage" />
+        </div>
   
 
 <form id="my_form" method="POST">
-<div class="container">
+<div class="container1">
   <div class="vertical-center">
-<button name="Refresh" class="btn btn-outline-primary waves-effect" type="submit" onclick="submitform()">Refresh</button>
 
-</span>
+<button name="Refresh" class="btn btn-success" type="submit" onclick="submitform()">Refresh</button>
+
 </div>
 </div>
 

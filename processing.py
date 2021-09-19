@@ -73,9 +73,9 @@ class Token:
         self.next, self.prev = next, prev
 
 class Chat_processor:
-    def __init__(self, maxToken=10, manageDuplicateUsers=True, manageDuplicateWords=False):
+    def __init__(self, maxToken=10, manageDuplicateUsers=False, manageDuplicateWords=True):
         self.stop_words = set(stopwords.words('english'))
-        more_stop = {',', '.'}
+        more_stop = {',', '.', '!', '?', '(', ')', ':', ';', '~', '@', '*', '%', '$', '#', '+', '-'}
         self.stop_words = self.stop_words.union(more_stop)
         self.fdist = FreqDist()
         self.stemmer = SnowballStemmer("english")

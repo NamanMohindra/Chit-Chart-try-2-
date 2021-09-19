@@ -41,22 +41,22 @@ def home():
     else:
         return render_template("index.html")
 
-@app.route("/something")
-def enter():
-    # global bot_flag
-    # if bot_flag == 0:
-    #     global r_flag
-    #     refresh_flag = Value('i', 0)
-    #     print("refresh_flag type:", type(refresh_flag))
-    #     r_flag = refresh_flag
-    #     print("main start")
-    #     p1 = Process(target=func2, args=[refresh_flag])
-    #     p1.start()
-    #     bot_flag = 1
-    return redirect(url_for("home"))
-    # p1.join()
-    # print("main end")
-    # return redirect(url_for("home"))
+# @app.route("/something")
+# def enter():
+#     # global bot_flag
+#     # if bot_flag == 0:
+#     #     global r_flag
+#     #     refresh_flag = Value('i', 0)
+#     #     print("refresh_flag type:", type(refresh_flag))
+#     #     r_flag = refresh_flag
+#     #     print("main start")
+#     #     p1 = Process(target=func2, args=[refresh_flag])
+#     #     p1.start()
+#     #     bot_flag = 1
+#     return redirect(url_for("home"))
+#     # p1.join()
+#     # print("main end")
+#     # return redirect(url_for("home"))
 
 def func2(refresh_flag):
     ourBot = bot.Bot(refresh_flag)
