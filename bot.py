@@ -25,7 +25,7 @@ class Bot(commands.Bot):
         self.nlp_processor = Chat_processor()
         self.mode = 1
         self.last_time_graph = time.time()
-        super().__init__(token='chd088egdk7ocqx4rbqs9ux367gckw', prefix='?', initial_channels=['NRG_Hamlinz','39daph','QuackityToo'])
+        super().__init__(token='chd088egdk7ocqx4rbqs9ux367gckw', prefix='?', initial_channels=['NRG_Hamlinz','39daph','QuackityToo','TimTheTatman','ESL_CSGO','RanbooLive','xQcOW','Castro_1021','s1mple','Mongraal'])
         self.refresh_flag = refresh_flag
 
     async def event_ready(self):
@@ -47,13 +47,13 @@ class Bot(commands.Bot):
 
         # we need to process the message first before dictionary
         # remember to add rstrip and lstrip
-        print("in event_message")
+        # print("in event_message")
         self.nlp_processor.process_string(message.content,message.author.name)
         
         
         # need to run build graph once the program starts and then it will call itself after every n seconds
-        print('time difference')
-        print(time.time() - self.last_time_graph)
+        # print('time difference')
+        # print(time.time() - self.last_time_graph)
         
         if time.time() - self.last_time_graph > 1:
             self.build_graph(self.nlp_processor.getCommon())
@@ -66,8 +66,8 @@ class Bot(commands.Bot):
     def build_graph(self,inputs):
         # we first sort the array and clean it to get it into plotting format
     
-        print('graph input')
-        print(inputs)
+        # print('graph input')
+        # print(inputs)
         x_axis = []
         y_axis = []
         for i in inputs:
@@ -86,8 +86,8 @@ class Bot(commands.Bot):
     def build_line_graph(self,inputs):
         # we first sort the array and clean it to get it into plotting format
         if inputs:
-            print('graph input')
-            print(inputs)
+            # print('graph input')
+            # print(inputs)
             x_axis = ['110','100','90','80','70','60','50','40','30','20','10','live']
             y_axis = inputs
             x = [1,2,3,4,5,6,7,8,9,10,11,12]
@@ -113,11 +113,11 @@ class Bot(commands.Bot):
     
     def refresh(self):
         self.nlp_processor.command(0)
-        print("step 1")
+        # print("step 1")
         #os.remove(r'./static/animal.jpg')
-        print("step 2")
+        # print("step 2")
         copyfile(r'./animal.jpg','./static/animal.jpg')
-        print("step 3")
+        # print("step 3")
 
     
         

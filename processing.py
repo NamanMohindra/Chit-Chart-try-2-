@@ -193,7 +193,7 @@ class Chat_processor:
 
 class Tester:
     def __init__(self):
-        self.chat_processor = Chat_processor(maxToken=5, manageDuplicateUsers=False, manageDuplicateWords=False)
+        self.chat_processor = Chat_processor(maxToken=1000, manageDuplicateUsers=False, manageDuplicateWords=False)
         self.ex0 = total[0]
 
     def test(self):
