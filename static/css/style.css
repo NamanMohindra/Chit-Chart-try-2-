@@ -11,13 +11,12 @@
 #myImage,#myImage1{
   border-collapse: collapse;
   display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 4px;
   width: 49%;
-  max-width:80%;
+  max-width:90%;
   max-height:80%;
-  padding-left: 10px;
-  padding-right:5px;
+  padding-left: 4px;
+  padding-right:4px;
   padding-bottom: 10px;
 } 
 
@@ -47,7 +46,7 @@ h2{
 }
 body {
   padding: 0;
-  margin: 0;
+  margin: auto;
   background: #f2f6e9;
   text-align: center;
   background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGBRT9PFI5mUMFB6qZ1a8D1rOrllFd-kAPxQ&usqp=CAU')
