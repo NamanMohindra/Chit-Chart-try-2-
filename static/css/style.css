@@ -1,0 +1,55 @@
+
+.navbar .navbar-brand {
+  color: #94128A;
+  font-size: 24px;
+}
+
+.container-fluid {
+  background-color: #CCCCFF;
+}
+
+#myImage{
+  border-collapse: collapse;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  max-width:80%;
+  max-height:80%;
+  padding: 10px
+}
+
+.inner-header{
+  text-align: center;
+}
+h2{
+  text-align: center;
+
+}
+
+form {
+  display: inline-block;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background: #f2f6e9;
+  text-align: center;
+  background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGBRT9PFI5mUMFB6qZ1a8D1rOrllFd-kAPxQ&usqp=CAU')
+}
+
+
+button{
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0 8px rgb(207, 207, 207);
+}
+
+button:hover{
+  border: none;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: inset 0 0 8px #f9f8fc;
+  } 
+
