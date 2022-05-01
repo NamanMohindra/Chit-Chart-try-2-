@@ -3,6 +3,7 @@ import nest_asyncio
 import seaborn as sns
 import matplotlib.pyplot as plt
 import time
+import requests as req
 import regex
 import nltk
 from nltk.stem import PorterStemmer,SnowballStemmer
@@ -25,7 +26,7 @@ class Bot(commands.Bot):
         self.nlp_processor = Chat_processor()
         self.mode = 1
         self.last_time_graph = time.time()
-        super().__init__(token='chd088egdk7ocqx4rbqs9ux367gckw', prefix='?', initial_channels=['NRG_Hamlinz','39daph','QuackityToo','TimTheTatman','ESL_CSGO','RanbooLive','xQcOW','Castro_1021','s1mple','Mongraal'])
+        super().__init__(token='chd088egdk7ocqx4rbqs9ux367gckw', prefix='?', initial_channels=['xQcOW','NRG_Hamlinz','39daph','QuackityToo','TimTheTatman','ESL_CSGO','RanbooLive','xQcOW','Castro_1021','s1mple','Mongraal'])
         self.refresh_flag = refresh_flag
 
     async def event_ready(self):
@@ -49,8 +50,8 @@ class Bot(commands.Bot):
         # remember to add rstrip and lstrip
         # print("in event_message")
         self.nlp_processor.process_string(message.content,message.author.name)
-        
-        
+        outputFromColab = req.get('https://0d27-35-204-199-197.ngrok.io/abcd', params={'string1': ' This string is in the event_message function'})
+        print(outputFromColab)
         # need to run build graph once the program starts and then it will call itself after every n seconds
         # print('time difference')
         # print(time.time() - self.last_time_graph)
@@ -84,6 +85,8 @@ class Bot(commands.Bot):
 
 
     def build_line_graph(self,inputs):
+        outputFromColab = req.get('https://0d27-35-204-199-197.ngrok.io/abcd', params={'string1': ' This string is in the build_line_graph function'})
+        print(outputFromColab.json())
         # we first sort the array and clean it to get it into plotting format
         if inputs:
             # print('graph input')

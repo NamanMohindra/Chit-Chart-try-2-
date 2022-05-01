@@ -1,7 +1,7 @@
 from flask import Flask,render_template,request,redirect,url_for
 import bot
 from multiprocessing import Process, Manager, Value
-
+import requests as req
 
 import asyncio
 app = Flask(__name__)
@@ -10,6 +10,7 @@ bot_flag = 0
 
 @app.route('/', methods=['GET','POST'])
 def home():
+    print('hi')
     global r_flag
     global bot_flag
     if bot_flag == 0:
@@ -30,6 +31,8 @@ def home():
                 if r_flag.value == 0:
                     r_flag.value += 1
             # do something
+            outputFromColab = req.get('https://0d27-35-204-199-197.ngrok.io/abcd', params={'string1': ' This string is from if condition home function'})
+            print(outputFromColab.json())
             return render_template("index.html")
         elif 'Polls' in value:
             # do something else

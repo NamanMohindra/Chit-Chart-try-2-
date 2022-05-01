@@ -1,7 +1,7 @@
 import nltk
 
-#nltk.download('stopwords') # for the stopwords
-#nltk.download('punkt') # for the stemmers I think
+nltk.download('stopwords') # for the stopwords
+nltk.download('punkt') # for the stemmers I think
 import regex
 from nltk.stem import PorterStemmer
 from nltk.stem import SnowballStemmer
