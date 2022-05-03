@@ -171,7 +171,6 @@ class Chat_processor:
     def getCommon(self, mostCommon=6):
         '''
         Return the list of most commong tupples
-
         '''
         return self.fdist.most_common(mostCommon)
 

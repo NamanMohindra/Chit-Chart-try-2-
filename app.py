@@ -31,8 +31,6 @@ def home():
                 if r_flag.value == 0:
                     r_flag.value += 1
             # do something
-            outputFromColab = req.get('https://0d27-35-204-199-197.ngrok.io/abcd', params={'string1': ' This string is from if condition home function'})
-            print(outputFromColab.json())
             return render_template("index.html")
         elif 'Polls' in value:
             # do something else

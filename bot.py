@@ -1,3 +1,4 @@
+from flask import render_template
 from twitchio.ext import commands
 import nest_asyncio
 import seaborn as sns
@@ -26,6 +27,7 @@ class Bot(commands.Bot):
         self.nlp_processor = Chat_processor()
         self.mode = 1
         self.last_time_graph = time.time()
+        self.last_time_graph_test = time.time()
         super().__init__(token='chd088egdk7ocqx4rbqs9ux367gckw', prefix='?', initial_channels=['xQcOW','NRG_Hamlinz','39daph','QuackityToo','TimTheTatman','ESL_CSGO','RanbooLive','xQcOW','Castro_1021','s1mple','Mongraal'])
         self.refresh_flag = refresh_flag
 
@@ -50,19 +52,37 @@ class Bot(commands.Bot):
         # remember to add rstrip and lstrip
         # print("in event_message")
         self.nlp_processor.process_string(message.content,message.author.name)
-        outputFromColab = req.get('https://0d27-35-204-199-197.ngrok.io/abcd', params={'string1': ' This string is in the event_message function'})
-        print(outputFromColab)
+        # print('---------------------------------------------------------------------------------')
+        # print('---------------------------MESSAGE AUTHOR AND CONTENT----------------------------')
+        # print('MESSAGE IS ------', message.content)
+        # print('AUTHOR IS -------', message.author.name)
         # need to run build graph once the program starts and then it will call itself after every n seconds
         # print('time difference')
         # print(time.time() - self.last_time_graph)
-        
+        if time.time() - self.last_time_graph_test > 5:
+            self.last_time_graph_test = time.time()
+            output = req.get('https://66d3-35-227-21-79.ngrok.io/abcd', params={'string1': message.content})
+            print('------------------------------This is the output-------------------------------')
+            print(output)
+            print(output.json())
         if time.time() - self.last_time_graph > 1:
-            self.build_graph(self.nlp_processor.getCommon())
-            self.build_line_graph(self.nlp_processor.get_CPM())
+            # print('---------------------------------------------------------------------------------')
+            # print('---------------------------------GRAPH FUNCTIONS---------------------------------')
+            # print(self.nlp_processor.getCommon())
+            # print(self.nlp_processor.get_CPM())
+            # print('---------------------------------------------------------------------------------')
+            bar_graph_data = self.nlp_processor.getCommon()
+            line_graph_data = self.nlp_processor.get_CPM()
+            self.build_graph(bar_graph_data)
+            self.build_line_graph(line_graph_data)
+            self.send_front_end_bar_graph_data(bar_graph_data)
             self.last_time_graph = time.time()
         # Since we have commands and are overriding the default `event_message`
         # We must let the bot know we want to handle and invoke our commands...
         await self.handle_commands(message)
+
+    def send_front_end_bar_graph_data(self, bar_graph_data):
+        return render_template('index.html', form = bar_graph_data)
     
     def build_graph(self,inputs):
         # we first sort the array and clean it to get it into plotting format
@@ -85,8 +105,6 @@ class Bot(commands.Bot):
 
 
     def build_line_graph(self,inputs):
-        outputFromColab = req.get('https://0d27-35-204-199-197.ngrok.io/abcd', params={'string1': ' This string is in the build_line_graph function'})
-        print(outputFromColab.json())
         # we first sort the array and clean it to get it into plotting format
         if inputs:
             # print('graph input')

@@ -27,7 +27,7 @@ HOW TO RUN
 
 Run the command
 
-python "ui.py" 
+python "app.py" 
 
 in the terminal when you are in the same directory as the repository to run the application.
 In a few seconds there will be an ip address and port displayed on the terminal screen.
