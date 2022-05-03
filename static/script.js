@@ -17,6 +17,14 @@ setInterval(function() {
     myImageElement1.src = '/static/animal2.jpg?rand=' + Math.random();
 }, 1000);
 
+var myImageElement3 = document.getElementById('myImage3');
+myImageElement3.src = '/static/animal3.jpg?rand=' + Math.random();
+
+setInterval(function() {
+    var myImageElement3 = document.getElementById('myImage3');
+    myImageElement3.src = '/static/animal3.jpg?rand=' + Math.random();
+}, 1000);
+
 function submit_form() {
     var form = document.getElementById("my_form");
     form.submit();
@@ -80,7 +88,7 @@ function submit_form() {
 //   counter++;
 //   // if the counter reaches the end of the array of images, reset to the first image
 //   if (counter > x.length) {
-//       counter = 1
+//       counter = 3
 //     }
 //   x[counter-1].style.display = "block";
 //   // Change image at random intervals
