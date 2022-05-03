@@ -11,20 +11,30 @@ from nltk.stem import PorterStemmer,SnowballStemmer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
-from collections import deque
 from processing import Token_List,Chat_processor,Token,Tester
 from shutil import copyfile
 from collections import deque
 import os 
 nest_asyncio.apply()
 sns.set_theme()
+
+# array_of_64 = deque()
 class Bot(commands.Bot):
+    array_of_64 = deque()
+    # def get_data_from_model():
+    #     # print('------------Request found-------------------------')
+    #     # print(len(Bot.array_of_64))
+    #     if len(Bot.array_of_64) > 0:
+    #         output = req.get('https://695f-104-196-119-181.ngrok.io/abcd', params={'string1': Bot.array_of_64})
+    #     else:
+    #         return '0'
+    #     print(output)
+    #     return output
     def __init__(self, refresh_flag = 0):
         # Initialise our Bot with our access token, prefix and a list of channels to join on boot...
         # prefix can be a callable, which returns a list of strings or a string...
         # initial_channels can also be a callable which returns a list of strings...
         print("Bot created")
-        self.array_of_64 = deque()
         self.nlp_processor = Chat_processor()
         self.mode = 1
         self.last_time_graph = time.time()
@@ -61,17 +71,23 @@ class Bot(commands.Bot):
         # need to run build graph once the program starts and then it will call itself after every n seconds
         # print('time difference')
         # print(time.time() - self.last_time_graph)
-        # if time.time() - self.last_time_graph_test > 5:
-        #     self.last_time_graph_test = time.time()
-        #     output = req.get('https://66d3-35-227-21-79.ngrok.io/abcd', params={'string1': message.content})
-        #     print('------------------------------This is the output-------------------------------')
-        #     print(output)
-        #     print(output.json())
-        if len(self.array_of_64) <= 63:
-            self.array_of_64.append(message.content)
+        if len(Bot.array_of_64) <= 63:
+            Bot.array_of_64.append(message.content)
+            print(len(Bot.array_of_64))
         else:
-            self.array_of_64.popleft()
-            self.array_of_64.append(message.content)
+            Bot.array_of_64.popleft()
+            Bot.array_of_64.append(message.content)
+            print(len(Bot.array_of_64))
+        print(time.time() - self.last_time_graph_test)
+        if time.time() - self.last_time_graph_test > 5:
+            print('------------------------------Testing string-------------------------------')
+            self.last_time_graph_test = time.time()
+            temp = '-`!~'.join(list(Bot.array_of_64))
+            print(temp)
+            output = req.post('https://4647-35-230-8-187.ngrok.io/abcd', params = {'string1': temp})
+            print('------------------------------This is the output-------------------------------')
+            print(output)
+            print(output.json())
         if time.time() - self.last_time_graph > 1:
             # print('---------------------------------------------------------------------------------')
             # print('---------------------------------GRAPH FUNCTIONS---------------------------------')
@@ -86,11 +102,6 @@ class Bot(commands.Bot):
         # Since we have commands and are overriding the default `event_message`
         # We must let the bot know we want to handle and invoke our commands...
         await self.handle_commands(message)
-
-    async def get_data_from_model(self):
-        print('------------Request found-------------------------')
-        output = req.get('https://4e6f-104-196-119-181.ngrok.io/abcd', params={'string1': self.array_of_64})
-        return output
     
     def build_graph(self,inputs):
         # we first sort the array and clean it to get it into plotting format
@@ -102,7 +113,7 @@ class Bot(commands.Bot):
         for i in inputs:
             x_axis.append(i[0])
             y_axis.append(i[1])
-        plt.figure(figsize=(10,8))
+        plt.figure(figsize=(10,8), dpi=500)
         plt.title("Word Frequency",fontsize=30)
         ax = sns.barplot(x = x_axis, y = y_axis,palette=("plasma"))
         ax.set_xlabel('Words', fontsize=16)
@@ -121,12 +132,12 @@ class Bot(commands.Bot):
             y_axis = inputs
             x = [1,2,3,4,5,6,7,8,9,10,11,12]
             plt.xticks(x, x_axis)
-            plt.rcParams['font.size'] = '14'
-            plt.figure(figsize=(10,8))
+            plt.rcParams['font.size'] = '11'
+            plt.figure(figsize=(10, 8), dpi=500)
             plt.title("Messages per minute",fontsize = 30)
             ax = sns.lineplot(x = x_axis, y = y_axis,marker='o',color='purple')
-            ax.set_xlabel('Seconds before', fontsize=16)
-            ax.set_ylabel('Frequency of Messages', fontsize=16)
+            ax.set_xlabel('Seconds before', fontsize=13)
+            ax.set_ylabel('Frequency of Messages', fontsize=13)
             plt.fill_between(x = x_axis,y1 = y_axis,color = 'purple',alpha=0.65)
             plt.savefig(r'./static/animal2.jpg')
             print('lineplot was printed')

@@ -7,9 +7,7 @@ import asyncio
 app = Flask(__name__)
 r_flag = None
 bot_flag = 0
-@app.route('/generateGraphs', methods=['GET'])
-def getGraphsData():
-    return bot.Bot().get_data_from_model()
+
 @app.route('/', methods=['GET','POST'])
 def home():
     print('hi')
@@ -60,6 +58,12 @@ def home():
 #     # p1.join()
 #     # print("main end")
 #     # return redirect(url_for("home"))
+
+# @app.route('/generateGraphs', methods=['GET'])
+# def getGraphsData():
+#     print('------------Request set-------------------------')
+#     return bot.Bot.get_data_from_model()
+
 
 def func2(refresh_flag):
     ourBot = bot.Bot(refresh_flag)

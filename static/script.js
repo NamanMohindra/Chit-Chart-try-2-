@@ -23,11 +23,14 @@ function submit_form() {
     return
 }
 
-setInterval(function() {
-    $.get("http://127.0.0.1:5000/generateGraphs", function(data, status){
-        console.log("Data: " + data + "\nStatus: " + status);
-    });
-}, 5000)
+// setInterval(function () {
+//     fetch('https://example.com/profile/avatar', {
+//         method: 'PUT',
+//         body: formData
+//     }).then(response => {
+//         console.log(response.json())
+//     })
+// }, 5000)
 
 // initialLoad = true;
 
