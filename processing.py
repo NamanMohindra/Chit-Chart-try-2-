@@ -199,12 +199,6 @@ class Tester:
         dic = self.chat_processor.fdist
         for lst in small:
             self.chat_processor.process_string(lst[0], lst[1])
-            for key in dic:
-                print(key, dic[key])
-            print(self.chat_processor.tokens.length)
-            print(self.chat_processor.tokens)
-            print(self.chat_processor.getCommon(5))
-            print('\n\n')
 
 def main():
     #    tester = Tester()

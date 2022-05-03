@@ -16,17 +16,13 @@ def home():
     if bot_flag == 0:
         global r_flag
         refresh_flag = Value('i', 0)
-        print("refresh_flag type:", type(refresh_flag))
         r_flag = refresh_flag
-        print("main start")
         p1 = Process(target=func2, args=[refresh_flag])
         p1.start()
         bot_flag = 1
     if request.method == "POST":
         value = request.form.to_dict()
         if 'Refresh' in value:
-            print("inside home: ", r_flag)
-            print("flag[0] type:", type(r_flag))
             with r_flag.get_lock():
                 if r_flag.value == 0:
                     r_flag.value += 1
@@ -67,7 +63,6 @@ def home():
 
 def func2(refresh_flag):
     ourBot = bot.Bot(refresh_flag)
-    print(ourBot)
     ourBot.run()
 
 # def main():
@@ -84,6 +79,5 @@ def func2(refresh_flag):
 #     print("main end")
 
 if __name__ == '__main__':
-    print("before main")
     #main()
     app.run(debug=True)

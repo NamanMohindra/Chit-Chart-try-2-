@@ -34,7 +34,6 @@ class Bot(commands.Bot):
         # Initialise our Bot with our access token, prefix and a list of channels to join on boot...
         # prefix can be a callable, which returns a list of strings or a string...
         # initial_channels can also be a callable which returns a list of strings...
-        print("Bot created")
         self.nlp_processor = Chat_processor()
         self.mode = 1
         self.last_time_graph = time.time()
@@ -84,7 +83,7 @@ class Bot(commands.Bot):
             self.last_time_graph_test = time.time()
             temp = '-`!~'.join(list(Bot.array_of_64))
             print(temp)
-            output = req.post('https://4647-35-230-8-187.ngrok.io/abcd', params = {'string1': temp})
+            output = req.post('https://9235-35-230-8-187.ngrok.io/abcd', params = {'string1': temp})
             print('------------------------------This is the output-------------------------------')
             print(output)
             print(output.json())
@@ -120,7 +119,6 @@ class Bot(commands.Bot):
         ax.set_ylabel('Frequency', fontsize=16)
         plt.rcParams['font.size'] = '18'
         plt.savefig(r'./static/animal.jpg')
-        print('graph was printed')
 
 
     def build_line_graph(self,inputs):
@@ -140,7 +138,6 @@ class Bot(commands.Bot):
             ax.set_ylabel('Frequency of Messages', fontsize=13)
             plt.fill_between(x = x_axis,y1 = y_axis,color = 'purple',alpha=0.65)
             plt.savefig(r'./static/animal2.jpg')
-            print('lineplot was printed')
 
     # async def listen(self):
     #     while True:
