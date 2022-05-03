@@ -7,7 +7,9 @@ import asyncio
 app = Flask(__name__)
 r_flag = None
 bot_flag = 0
-
+@app.route('/generateGraphs', methods=['GET'])
+def getGraphsData():
+    return bot.Bot().get_data_from_model()
 @app.route('/', methods=['GET','POST'])
 def home():
     print('hi')

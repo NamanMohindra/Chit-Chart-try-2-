@@ -5,25 +5,58 @@ var myImageElement = document.getElementById('myImage');
 myImageElement.src = '/static/animal.jpg?rand=' + Math.random();
 
 setInterval(function() {
-      var myImageElement = document.getElementById('myImage');
-      myImageElement.src = '/static/animal.jpg?rand=' + Math.random();
- }, 1000);
-
+    var myImageElement = document.getElementById('myImage');
+    myImageElement.src = '/static/animal.jpg?rand=' + Math.random();
+}, 1000);
 
 var myImageElement1 = document.getElementById('myImage1');
 myImageElement1.src = '/static/animal2.jpg?rand=' + Math.random();
 
 setInterval(function() {
-      var myImageElement1 = document.getElementById('myImage1');
-      myImageElement1.src = '/static/animal2.jpg?rand=' + Math.random();
- }, 1000);
+    var myImageElement1 = document.getElementById('myImage1');
+    myImageElement1.src = '/static/animal2.jpg?rand=' + Math.random();
+}, 1000);
 
-function submit_form(){
-   var form = document.getElementById("my_form");
-   form.submit();
-   return
- }
+function submit_form() {
+    var form = document.getElementById("my_form");
+    form.submit();
+    return
+}
 
+setInterval(function() {
+    $.get("http://127.0.0.1:5000/generateGraphs", function(data, status){
+        console.log("Data: " + data + "\nStatus: " + status);
+    });
+}, 5000)
+
+// initialLoad = true;
+
+// setInterval(function(){
+//       if (initialLoad == true) {
+//             new Chart(document.getElementById("myChart"), {
+//                   type: 'bar',
+//                   data: {
+//                     labels: country,
+//                     datasets: [
+//                       {
+//                         label: "Population (millions)",
+//                         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+//                         data: value
+//                       }
+//                     ]
+//                   },
+//                   options: {
+//                     legend: { display: false },
+//                     title: {
+//                       display: true,
+//                       text: 'Total Confirmed Cases of COVID in May'
+//                     }
+//                   }
+//             });
+//       } else {
+            
+//       }
+// }, 1000);
 // store the divs of the four image windows
 // let timeout =["first_slide"];
 

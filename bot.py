@@ -14,16 +14,17 @@ from nltk.probability import FreqDist
 from collections import deque
 from processing import Token_List,Chat_processor,Token,Tester
 from shutil import copyfile
+from collections import deque
 import os 
 nest_asyncio.apply()
 sns.set_theme()
 class Bot(commands.Bot):
-
-    def __init__(self, refresh_flag):
+    def __init__(self, refresh_flag = 0):
         # Initialise our Bot with our access token, prefix and a list of channels to join on boot...
         # prefix can be a callable, which returns a list of strings or a string...
         # initial_channels can also be a callable which returns a list of strings...
         print("Bot created")
+        self.array_of_64 = deque()
         self.nlp_processor = Chat_processor()
         self.mode = 1
         self.last_time_graph = time.time()
@@ -52,6 +53,7 @@ class Bot(commands.Bot):
         # remember to add rstrip and lstrip
         # print("in event_message")
         self.nlp_processor.process_string(message.content,message.author.name)
+
         # print('---------------------------------------------------------------------------------')
         # print('---------------------------MESSAGE AUTHOR AND CONTENT----------------------------')
         # print('MESSAGE IS ------', message.content)
@@ -59,12 +61,17 @@ class Bot(commands.Bot):
         # need to run build graph once the program starts and then it will call itself after every n seconds
         # print('time difference')
         # print(time.time() - self.last_time_graph)
-        if time.time() - self.last_time_graph_test > 5:
-            self.last_time_graph_test = time.time()
-            output = req.get('https://66d3-35-227-21-79.ngrok.io/abcd', params={'string1': message.content})
-            print('------------------------------This is the output-------------------------------')
-            print(output)
-            print(output.json())
+        # if time.time() - self.last_time_graph_test > 5:
+        #     self.last_time_graph_test = time.time()
+        #     output = req.get('https://66d3-35-227-21-79.ngrok.io/abcd', params={'string1': message.content})
+        #     print('------------------------------This is the output-------------------------------')
+        #     print(output)
+        #     print(output.json())
+        if len(self.array_of_64) <= 63:
+            self.array_of_64.append(message.content)
+        else:
+            self.array_of_64.popleft()
+            self.array_of_64.append(message.content)
         if time.time() - self.last_time_graph > 1:
             # print('---------------------------------------------------------------------------------')
             # print('---------------------------------GRAPH FUNCTIONS---------------------------------')
@@ -75,14 +82,15 @@ class Bot(commands.Bot):
             line_graph_data = self.nlp_processor.get_CPM()
             self.build_graph(bar_graph_data)
             self.build_line_graph(line_graph_data)
-            self.send_front_end_bar_graph_data(bar_graph_data)
             self.last_time_graph = time.time()
         # Since we have commands and are overriding the default `event_message`
         # We must let the bot know we want to handle and invoke our commands...
         await self.handle_commands(message)
 
-    def send_front_end_bar_graph_data(self, bar_graph_data):
-        return render_template('index.html', form = bar_graph_data)
+    async def get_data_from_model(self):
+        print('------------Request found-------------------------')
+        output = req.get('https://4e6f-104-196-119-181.ngrok.io/abcd', params={'string1': self.array_of_64})
+        return output
     
     def build_graph(self,inputs):
         # we first sort the array and clean it to get it into plotting format
