@@ -10,7 +10,6 @@ bot_flag = 0
 
 @app.route('/', methods=['GET','POST'])
 def home():
-    print('hi')
     global r_flag
     global bot_flag
     if bot_flag == 0:

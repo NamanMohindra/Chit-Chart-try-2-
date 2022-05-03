@@ -13,7 +13,7 @@ from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 from processing import Token_List,Chat_processor,Token,Tester
 from shutil import copyfile
-from collections import deque
+from collections import deque, defaultdict
 import os 
 nest_asyncio.apply()
 sns.set_theme()
@@ -21,6 +21,7 @@ sns.set_theme()
 # array_of_64 = deque()
 class Bot(commands.Bot):
     array_of_64 = deque()
+    user_message_mapping = defaultdict(list)
     # def get_data_from_model():
     #     # print('------------Request found-------------------------')
     #     # print(len(Bot.array_of_64))
@@ -41,10 +42,6 @@ class Bot(commands.Bot):
         super().__init__(token='chd088egdk7ocqx4rbqs9ux367gckw', prefix='?', initial_channels=['xQcOW','NRG_Hamlinz','39daph','QuackityToo','TimTheTatman','ESL_CSGO','RanbooLive','xQcOW','Castro_1021','s1mple','Mongraal'])
         self.refresh_flag = refresh_flag
 
-    async def event_ready(self):
-        # Notify us when everything is ready!
-        # We are logged in and ready to chat and use commands...
-        print(f'Logged in as | {self.nick}')
 
     async def event_message(self, message):
         # Messages with echo set to True are messages sent by the bot...
@@ -70,23 +67,32 @@ class Bot(commands.Bot):
         # need to run build graph once the program starts and then it will call itself after every n seconds
         # print('time difference')
         # print(time.time() - self.last_time_graph)
+        # -`!^ (key) -`!~ (value) -`!~ (value) -`!~ (value)
         if len(Bot.array_of_64) <= 63:
             Bot.array_of_64.append(message.content)
-            print(len(Bot.array_of_64))
         else:
+            Bot.user_message_mapping[message.author.name].append(message.content)
             Bot.array_of_64.popleft()
             Bot.array_of_64.append(message.content)
-            print(len(Bot.array_of_64))
-        print(time.time() - self.last_time_graph_test)
+        if len(Bot.user_message_mapping) <= 50:
+            Bot.user_message_mapping[message.author.name].append(message.content)
+        else:
+            temp = ''
+            for key, value in Bot.user_message_mapping.items():
+                print('-`!^' + str(key))
+                print('-`!~'.join(value))
+                temp += '-`!^' + str(key) + '-`!~' + '-`!~'.join(value)
+                print('----------------Key Change-------------------')
+                print('-`!^' + str(key) + '-`!~' + '-`!~'.join(value))
+            output = req.post('https://0396-35-230-8-187.ngrok.io/abcd', params = {'string1': temp})
+            print(output)
+            Bot.user_message_mapping = defaultdict(list)
         if time.time() - self.last_time_graph_test > 5:
-            print('------------------------------Testing string-------------------------------')
             self.last_time_graph_test = time.time()
             temp = '-`!~'.join(list(Bot.array_of_64))
-            print(temp)
-            output = req.post('https://9235-35-230-8-187.ngrok.io/abcd', params = {'string1': temp})
-            print('------------------------------This is the output-------------------------------')
+            output = req.post('https://0396-35-230-8-187.ngrok.io/abcd', params = {'string1': temp})
             print(output)
-            print(output.json())
+            self.build_toxicity_bar_graph(output)
         if time.time() - self.last_time_graph > 1:
             # print('---------------------------------------------------------------------------------')
             # print('---------------------------------GRAPH FUNCTIONS---------------------------------')
@@ -101,6 +107,20 @@ class Bot(commands.Bot):
         # Since we have commands and are overriding the default `event_message`
         # We must let the bot know we want to handle and invoke our commands...
         await self.handle_commands(message)
+
+    def build_toxicity_bar_graph(self, inputs):
+        x_axis = []
+        y_axis = []
+        for key, value in inputs.items():
+            x_axis.append(key)
+            y_axis.append(value)
+        plt.figure(figsize=(10,8), dpi=500)
+        plt.title("Sentiment levels",fontsize=30)
+        ax = sns.barplot(x = x_axis, y = y_axis,palette=("plasma"))
+        ax.set_xlabel('Sentiment Type', fontsize=16)
+        ax.set_ylabel('Sentiment level', fontsize=16)
+        plt.rcParams['font.size'] = '18'
+        plt.savefig(r'./static/animal3.jpg')
     
     def build_graph(self,inputs):
         # we first sort the array and clean it to get it into plotting format
