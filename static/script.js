@@ -1,6 +1,3 @@
-let counter = 0;
-
-
 var myImageElement = document.getElementById('myImage');
 myImageElement.src = '/static/animal.jpg?rand=' + Math.random();
 
@@ -19,11 +16,31 @@ setInterval(function() {
 
 var myImageElement3 = document.getElementById('myImage3');
 myImageElement3.src = '/static/animal3.jpg?rand=' + Math.random();
+var myImageElement4 = document.getElementById('myImage4');
+myImageElement4.src = '/static/animal4.jpg?rand=' + Math.random();
+var myImageElement5 = document.getElementById('myImage5');
+myImageElement5.src = '/static/animal5.jpg?rand=' + Math.random();
+var myImageElement6 = document.getElementById('myImage6');
+myImageElement6.src = '/static/animal6.jpg?rand=' + Math.random();
+var myImageElement7 = document.getElementById('myImage7');
+myImageElement7.src = '/static/animal7.jpg?rand=' + Math.random();
+var myImageElement8 = document.getElementById('myImage8');
+myImageElement8.src = '/static/animal8.jpg?rand=' + Math.random();
 
 setInterval(function() {
-    var myImageElement3 = document.getElementById('myImage3');
+    myImageElement3 = document.getElementById('myImage3');
     myImageElement3.src = '/static/animal3.jpg?rand=' + Math.random();
-}, 1000);
+    myImageElement4 = document.getElementById('myImage4');
+    myImageElement4.src = '/static/myImage4.jpg?rand=' + Math.random();
+    myImageElement5 = document.getElementById('myImage5');
+    myImageElement5.src = '/static/animal5.jpg?rand=' + Math.random();
+    myImageElement6 = document.getElementById('myImage6');
+    myImageElement6.src = '/static/animal6.jpg?rand=' + Math.random();
+    myImageElement7 = document.getElementById('myImage7');
+    myImageElement7.src = '/static/animal7.jpg?rand=' + Math.random();
+    myImageElement8 = document.getElementById('myImage8');
+    myImageElement8.src = '/static/animal8.jpg?rand=' + Math.random();
+}, 10000);
 
 function submit_form() {
     var form = document.getElementById("my_form");
