@@ -1,6 +1,6 @@
 Introduction 
 
-Hello, we are Chit Chart, composed of 4 members, Ishtdeep Singh, John Lee, Naman Mohindra, and Amy Tan. Chit Chart is an application which captures chat in live streams in twitch and provides Live analysis and feedback to the streamer which can help the streamer improve the quality of stream.
+Hello, we are Chit Chart, composed of 3 members, Ishtdeep Singh, Naman Mohindra, and Abhishek Shah. Chit Chart is an application which captures chat in live streams in twitch and provides Live analysis and feedback to the streamer which can help the streamer improve the quality of stream.
 
 Requirements
 
