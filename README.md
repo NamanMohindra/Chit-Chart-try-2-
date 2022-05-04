@@ -25,7 +25,25 @@ pipwin and then install the packages in which the error occurred through pipwin.
 
 HOW TO RUN
 
-Run the command
+If running the jupyter notebook locally(not recommended), run the two cells containing the lines 
+```
+server.run_app(app = app)
+```
+in both the jupyter notebooks and copy the localhost url 
+```
+http://localhost:10000
+```
+into the sentiment_classifier_connection_string and toxicity_classifier_connection_string variables in the bot.py file. This spins up the 2 classifiers as jupyter notebook servers.
+
+If using google colab to run the 2 models(recommended), copy the url that looks something like 
+```
+NgrokTunnel: "https://xxxx-xx-xx-xx-xx.ngrok.io"
+```
+into the two variables named sentiment_classifier_connection_string and toxicity_classifier_connection_string.
+
+Note that the string from the file name 'ML_Project_sentiment_classifier' must be pasted into the variable sentiment_classifier_connection_string and the url from the file name 'ML_Project_toxicity_classifier' must be pasted into the variable toxicity_classifier_connection_string. This way you can set up the server on google colab(recommended).
+
+To run the local flask application to view the streamer-UI, run the command
 
 python "app.py" 
 
