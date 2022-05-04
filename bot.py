@@ -37,6 +37,8 @@ class Bot(commands.Bot):
         # Initialise our Bot with our access token, prefix and a list of channels to join on boot...
         # prefix can be a callable, which returns a list of strings or a string...
         # initial_channels can also be a callable which returns a list of strings...
+        self.sentiment_classifier_connection_string = 'https://a7e2-34-73-20-82.ngrok.io'
+        self.toxicity_classifier_connection_string = 'https://0e62-35-184-158-133.ngrok.io'
         self.nlp_processor = Chat_processor()
         self.mode = 1
         self.toxicity_input = ''
@@ -92,10 +94,10 @@ class Bot(commands.Bot):
         if time.time() - self.last_time_graph_test > 10:
             self.last_time_graph_test = time.time()
             temp = '-`!~'.join(list(Bot.array_of_64))
-            output = req.post('https://6902-35-239-187-195.ngrok.io/abcd', params = {'string1': temp})
+            output = req.post(self.sentiment_classifier_connection_string + '/abcd', params = {'string1': temp})
             for key, value in Bot.user_message_mapping.items():
                 self.toxicity_input += '-`!^' + str(key) + '-`!~' + '-`!~'.join(value)
-            toxicity_output = req.post('https://f400-107-167-180-18.ngrok.io/abcde', params = {'string1': self.toxicity_input})
+            toxicity_output = req.post(self.toxicity_classifier_connection_string + '/abcde', params = {'string1': self.toxicity_input})
             print(toxicity_output)
             print(toxicity_output.json())
             self.build_toxicity_graphs(toxicity_output.json()['message'])

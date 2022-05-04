@@ -31,7 +31,7 @@ setInterval(function() {
     myImageElement3 = document.getElementById('myImage3');
     myImageElement3.src = '/static/animal3.jpg?rand=' + Math.random();
     myImageElement4 = document.getElementById('myImage4');
-    myImageElement4.src = '/static/myImage4.jpg?rand=' + Math.random();
+    myImageElement4.src = '/static/animal4.jpg?rand=' + Math.random();
     myImageElement5 = document.getElementById('myImage5');
     myImageElement5.src = '/static/animal5.jpg?rand=' + Math.random();
     myImageElement6 = document.getElementById('myImage6');
